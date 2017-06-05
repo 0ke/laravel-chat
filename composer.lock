@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0bf6a18521c410880e5fc3883b8cb50c",
-    "content-hash": "68487a4bd5d0e9f9eed406b7fcbb901f",
+    "hash": "d75a5997eae385041b594426732d077c",
+    "content-hash": "4374d5cb8c769db5b49a0dde1291ed59",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1928,6 +1928,44 @@
                 "environment"
             ],
             "time": "2016-09-01 10:05:43"
+        },
+        {
+            "name": "willypuzzle/laravel-helpers",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willypuzzle/laravel-helpers.git",
+                "reference": "fd982f4bfc5e1e678b8205fac8cd87a700df3d3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/willypuzzle/laravel-helpers/zipball/fd982f4bfc5e1e678b8205fac8cd87a700df3d3e",
+                "reference": "fd982f4bfc5e1e678b8205fac8cd87a700df3d3e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.4.*",
+                "illuminate/support": "5.4.*",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Willypuzzle\\Helpers\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Domenico Rizzo",
+                    "email": "domenico.rizzo@gmail.com"
+                }
+            ],
+            "description": "A General Laravel Helpers package.",
+            "time": "2017-06-05 14:00:46"
         },
         {
             "name": "yajra/laravel-datatables-oracle",

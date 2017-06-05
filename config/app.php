@@ -177,6 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Willypuzzle\Helpers\GeneralServiceProvider::class,
+
     ],
 
     /*
@@ -225,6 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Environment' => Willypuzzle\Helpers\Facades\General\Environment::class,
 
     ],
 

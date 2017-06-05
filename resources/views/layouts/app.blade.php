@@ -14,6 +14,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+
+    @if( Environment::is(false, true, true) )
+        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.min.css') }}"/>
+
+        <script type="text/javascript" src="{{ asset('js/datatables/datatables.min.js') }}"></script>
+    @else
+        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.css') }}"/>
+
+        <script type="text/javascript" src="{{ asset('js/datatables/datatables.js') }}"></script>
+    @endif
 </head>
 <body>
     <div id="app">

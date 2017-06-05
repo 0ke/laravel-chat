@@ -9,6 +9,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "predis/predis": "^1.1",
+        "willypuzzle/laravel-helpers": "^0.0.6",
         "yajra/laravel-datatables-oracle": "^7.5"
     },
     "require-dev": {
