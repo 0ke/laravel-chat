@@ -1,0 +1,62 @@
+.chat-box {
+  border: 1px solid grey;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+#chat-box {
+  min-height: 400px;
+}
+
+@media (max-width: $screen-xs-max) {
+  .message-box {
+    height: 30%;
+  }
+
+  .users-box {
+    height: 30%;
+  }
+
+  .text-field {
+    height: 10%;
+  }
+}
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .message-box {
+    height: 30%;
+  }
+
+  .users-box {
+    height: 30%;
+  }
+
+  .text-field {
+    height: 10%;
+  }
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .message-box {
+    height: 85%;
+  }
+
+  .users-box {
+    height: 85%;
+  }
+
+  .text-field {
+    height: 15%;
+  }
+}
+@media (min-width: $screen-lg-min) {
+  .message-box {
+    height: 85%;
+  }
+
+  .users-box {
+    height: 85%;
+  }
+
+  .text-field {
+    height: 15%;
+  }
+}

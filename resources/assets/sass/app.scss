@@ -7,3 +7,19 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "../vendor/datatables/datatables.css";
+
+@import "chat";
+
+html, body {
+  height: 100%;
+}
+
+.red-input {
+  border: 1px solid red;
+}
+
+.datatable-cell-center {
+  text-align: center;
+}

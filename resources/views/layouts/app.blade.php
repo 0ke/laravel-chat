@@ -15,19 +15,11 @@
 
     <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
 
-    @if( Environment::is(false, true, true) )
-        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.min.css') }}"/>
-
-        <script type="text/javascript" src="{{ asset('js/datatables/datatables.min.js') }}"></script>
-    @else
-        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.css') }}"/>
-
-        <script type="text/javascript" src="{{ asset('js/datatables/datatables.js') }}"></script>
-    @endif
+    @stack('script-head')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav id="main-navbar" class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -58,6 +50,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li><a href="{{ route('chat.rooms.index') }}">Rooms</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -86,7 +79,10 @@
         @yield('content')
     </div>
 
+    @stack('body-level')
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('script-footer')
 </body>
 </html>
