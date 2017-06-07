@@ -1,25 +1,6 @@
 <template>
     <div>
-        <nav id="chat-menu-bar" class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li v-if="menu.submenus.length > 0" :class="{dropdown:menu.submenus}" v-for="menu in chat.menu" key="menu.id">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ menu.title }}<span class="caret"></span></a>
-                            <ul  class="dropdown-menu">
-                                <li v-for="submenu in menu.submenus" key="submenu.id">
-                                    <a href="#" @click.prevent="fire(submenu.action)">
-                                        {{ submenu.title }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li v-else=""><a href="#" @click.prevent="fire(submenu.action)">{{ menu.title }}</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
+        <bootstrap-menu :menus="chat.menu" :id="'chat-menu-bar'" @fired="fire"></bootstrap-menu>
         <div id="chat-box" class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
             <div id="sub-chat-box" style="height: 100%;margin-bottom: 0;" class="panel panel-default">
                 <div id="chat-panel-heading" class="panel-heading">{{ chat.title }}</div>
@@ -40,12 +21,15 @@
 </template>
 
 <script>
+    Vue.component('chat-message', require('./Chat/ChatMessages.vue'));
+    Vue.component('chat-user', require('./Chat/ChatUsers.vue'));
+    Vue.component('chat-new-message', require('./Chat/ChatNewMessages.vue'));
+
     export default {
         props : ['chat'],
         mounted() {
             this.loadUsers();
             this.loadMessages();
-            console.log(this.chat)
         },
         computed : {
         },

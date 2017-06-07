@@ -16,26 +16,14 @@ window.Vue = require('vue');
  */
 
 Vue.component('chat', require('./components/Chat.vue'));
-Vue.component('chat-message', require('./components/ChatMessages.vue'));
-Vue.component('chat-user', require('./components/ChatUsers.vue'));
-Vue.component('chat-new-message', require('./components/ChatNewMessages.vue'));
+Vue.component('bootstrap-menu', require('./components/utility/BootstrapMenu.vue'))
 
 const app = new Vue({
     el: '#app',
-    data : {
-        user : {
-          name : 'Pippo'
-        }
-    },
     computed:{
       chat(){
           return window.Chat;
       }
-    },
-    methods:{
-    },
-    mounted(){ //created()
-
     }
 });
 

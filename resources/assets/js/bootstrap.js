@@ -10,9 +10,9 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
-
     window.BootstrapDialog = require('bootstrap3-dialog');
+
+    //require('bootstrap-sass');
 } catch (e) {}
 
 /**
@@ -54,7 +54,7 @@ import Echo from 'laravel-echo'
 //     key: 'your-pusher-key'
 // });
 
-if(io){
+if (typeof io !== 'undefined'){
     window.Echo = new Echo({
         broadcaster: 'socket.io',
         host: window.location.hostname + ':6001'

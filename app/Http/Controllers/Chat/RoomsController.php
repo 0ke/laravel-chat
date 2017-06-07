@@ -180,6 +180,6 @@ class RoomsController extends Controller
 
         event(new RoomUnjoined($joinedRoom, $user));
 
-        redirect(route('chat.rooms.index'));
+        return redirect()->route('chat.rooms.index');
     }
 }
