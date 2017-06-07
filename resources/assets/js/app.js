@@ -15,10 +15,28 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('chat', require('./components/Chat.vue'));
+Vue.component('chat-message', require('./components/ChatMessages.vue'));
+Vue.component('chat-user', require('./components/ChatUsers.vue'));
+Vue.component('chat-new-message', require('./components/ChatNewMessages.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data : {
+        user : {
+          name : 'Pippo'
+        }
+    },
+    computed:{
+      chat(){
+          return window.Chat;
+      }
+    },
+    methods:{
+    },
+    mounted(){ //created()
+
+    }
 });
 
 require('./broadcast.js');

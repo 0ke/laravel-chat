@@ -22,7 +22,9 @@ return [
                 'join' => 'Join',
             ],
             'content' => [
-                'join' => 'Join'
+                'join' => 'Join',
+                'unjoin' => 'Unjoin',
+                'open' => 'Open'
             ]
         ]
     ],
@@ -47,6 +49,22 @@ return [
             ],
             'sending' => [
                 'label' => "Sending"
+            ]
+        ]
+    ],
+    'dialogs' => [
+        'unjoin' => [
+            'owner' => [
+                'title' => "Warning!",
+                'message' => 'You are the owner of the chat, if you leave the chat remains without owner, are you sure?',
+                'buttons' => [
+                    'cancel' => [
+                        'label' => 'Cancel'
+                    ],
+                    'confirm' => [
+                        'label' => 'Yes,continue'
+                    ]
+                ]
             ]
         ]
     ]

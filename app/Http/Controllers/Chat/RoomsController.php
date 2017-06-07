@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Chat;
 
+use App\Events\NewRoomAdded;
+use App\Events\RoomJoined;
+use App\Events\RoomUnjoined;
 use App\Libraries\Chat\RolesManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,9 +33,26 @@ class RoomsController extends Controller
     {
         $rooms = Room::select(['id', 'name', 'description', 'created_at']);
 
+        $user = auth()->user();
+
         return Datatables::of($rooms)
-            ->addColumn('join', function ($room) {
-                return '<a href="'.route('chat.rooms.join', ['id' => $room->id]).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>'.trans('rooms.list.table.content.join').'</a>';
+            ->addColumn('join', function ($room) use ($user) {
+                $model = $room->users()->withPivot('role')->find($user->id);
+                if(!$model){
+                    return '<a href="'.route('chat.rooms.join', ['id' => $room->id]).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>'.trans('rooms.list.table.content.join').'</a>';
+                }else{
+                    if($model->pivot->role == RolesManager::getOwnerRoleCode()){
+                        $ownerAttr = 'yes';
+                    }else{
+                        $ownerAttr = 'no';
+                    }
+
+                    $unjoinButton  = '<button owner="'.$ownerAttr.'" style="margin-right: 3px;" href="'.route('chat.rooms.unjoin', ['id' => $room->id]).'" class="unjoin-chat-action-button btn btn-xs btn-danger"><i class="glyphicon glyphicon-edit"></i>'.trans('rooms.list.table.content.unjoin').'</button>';
+                    $openButton = '<a href="'.route('chat.rooms.join', ['id' => $room->id]).'" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i>'.trans('rooms.list.table.content.open').'</a>';
+
+                    return $unjoinButton.$openButton;
+                }
+
             })
             ->rawColumns(['join'])
             ->make(true);
@@ -73,6 +93,8 @@ class RoomsController extends Controller
         $user = auth()->user();
 
         $user->rooms()->attach($room->id, ['role' => RolesManager::getOwnerRoleCode()]);
+
+        event(new NewRoomAdded($room));
 
         return [
             'response' => true
@@ -135,12 +157,29 @@ class RoomsController extends Controller
         //
         $user = auth()->user();
 
-        $joinedRoom = $user->rooms()->find($roomId)->first();
+        $joinedRoom = $user->rooms()->find($roomId);
 
         if (!$joinedRoom){
-            $joinedRoom = $user->rooms()->attach($roomId, ['role' => RolesManager::getUserRoleCode()]);
+            $user->rooms()->attach($roomId, ['role' => RolesManager::getUserRoleCode()]);
+            $joinedRoom = Room::find($roomId);
         }
 
+        event(new RoomJoined($joinedRoom, $user));
+
         return view('chat.room.index', ['joinedRoom' => $joinedRoom]);
+    }
+
+    public function unjoin($roomId)
+    {
+        //
+        $user = auth()->user();
+
+        $joinedRoom = $user->rooms()->findOrFail($roomId);
+
+        $user->rooms()->detach($roomId);
+
+        event(new RoomUnjoined($joinedRoom, $user));
+
+        redirect(route('chat.rooms.index'));
     }
 }

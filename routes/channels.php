@@ -18,3 +18,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('test', function ($user) {
     return true;
 });
+
+Broadcast::channel('rooms-list', function ($user) {
+    return true;
+});

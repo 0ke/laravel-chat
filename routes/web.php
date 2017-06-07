@@ -30,5 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/rooms/join/{id}', 'Chat\RoomsController@join')->name('chat.rooms.join');
 
+    Route::post('/rooms/unjoin/{id}', 'Chat\RoomsController@unjoin')->name('chat.rooms.unjoin');
+
     Route::post('/rooms', 'Chat\RoomsController@store')->name('chat.rooms.store');
 });

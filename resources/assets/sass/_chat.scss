@@ -8,6 +8,18 @@
   min-height: 400px;
 }
 
+.text-field {
+  padding: 0;
+}
+
+#text-field-textarea{
+  &:active,&:focus{
+    border: none;
+    outline: none;
+  }
+
+}
+
 @media (max-width: $screen-xs-max) {
   .message-box {
     height: 30%;

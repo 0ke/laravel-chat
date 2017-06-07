@@ -42,6 +42,9 @@
         </div>
     </div>
 </div>
+<form id ="unjoin-chat-submit-form" method="post" action="">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+</form>
 @endsection
 
 @include('chat.rooms.create')
@@ -60,9 +63,58 @@
                 { data: 'name', name: 'name' },
                 { data: 'description', name: 'description' },
                 { data: 'created_at', name: 'created_at' },
-                { data: 'join', name: 'join', orderable: false, searchable: false, width: '100px', className: "datatable-cell-center" }
-            ]
+                { data: 'join', name: 'join', orderable: false, searchable: false, width: '180px', className: "datatable-cell-center" }
+            ],
+            fnDrawCallback: function () {
+                $('.unjoin-chat-action-button').off();
+                $('.unjoin-chat-action-button').on('click', function () {
+                    var $this = $(this);
+                    var url = $this.attr('href');
+                    var owner = $this.attr('owner') === 'yes';
+
+                    var $form = $('#unjoin-chat-submit-form');
+
+                    $form.attr('action', url);
+
+                    if(owner){
+                        BootstrapDialog.show({
+                            title: '<h2>{{ trans('rooms.dialogs.unjoin.owner.title') }}</h2>',
+                            message: '{{ trans('rooms.dialogs.unjoin.owner.message') }}',
+                            buttons: [{
+                                label: '{{ trans('rooms.dialogs.unjoin.owner.buttons.cancel.label') }}',
+                                cssClass: 'btn-success',
+                                action: function(dialog) {
+                                    dialog.close();
+                                }
+                            }, {
+                                label: '{{ trans('rooms.dialogs.unjoin.owner.buttons.confirm.label') }}',
+                                cssClass: 'btn-danger',
+                                action: function(dialog) {
+                                    $form.submit();
+                                }
+                            }]
+                        });
+                    }else{
+                        $form.submit();
+                    }
+                })
+            }
         });
+    });
+</script>
+<script>
+    $(function () {
+        if(window.Echo){
+            window.Echo.private('rooms-list')
+                .listen('NewRoomAdded', (e) => {
+                    roomsChatTable.ajax.reload();
+                });
+        }
+    });
+</script>
+<script>
+    $(function () {
+
     });
 </script>
 @endpush
