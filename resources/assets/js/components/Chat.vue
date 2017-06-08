@@ -21,12 +21,17 @@
 </template>
 
 <script>
-    Vue.component('chat-message', require('./Chat/ChatMessages.vue'));
-    Vue.component('chat-user', require('./Chat/ChatUsers.vue'));
-    Vue.component('chat-new-message', require('./Chat/ChatNewMessages.vue'));
+    //Vue.component('chat-message', require('./Chat/ChatMessages.vue'));
+    //Vue.component('chat-user', require('./Chat/ChatUsers.vue'));
+    //Vue.component('chat-new-message', require('./Chat/ChatNewMessages.vue'));
 
     export default {
         props : ['chat'],
+        components : {
+            'chat-new-message': require('./Chat/ChatNewMessages.vue'),
+            'chat-user': require('./Chat/ChatUsers.vue'),
+            'chat-message': require('./Chat/ChatMessages.vue')
+        },
         mounted() {
             this.loadUsers();
             this.loadMessages();
