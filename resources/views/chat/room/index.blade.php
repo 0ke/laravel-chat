@@ -26,7 +26,10 @@
                     }
                 ]
             }
-        ]
+        ],
+        urls : {
+            logout: '{{ route('chat.rooms.index') }}'
+        }
     }
 </script>
 @endpush

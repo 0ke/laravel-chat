@@ -49,12 +49,11 @@
                 this[method]();
             },
             logout(){
-                console.log('logout')
                 this.users = [];
                 this.messages = [];
 
                 //Fare chiamata axios
-                window.location.href = '/rooms';
+                window.location.href = this.chat.urls.logout;
             },
             loadUsers(){
                 //Fare con axios
